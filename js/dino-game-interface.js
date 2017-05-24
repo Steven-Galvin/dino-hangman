@@ -10,14 +10,14 @@ $(document).ready(function() {
     event.preventDefault();
     var getDinos      = $.get('http://dinoipsum.herokuapp.com/api/?format=text&paragraphs=1&words=5'),
         fillContainer = function(d) {
-          var dinos = (d).trim().replace(".", "").split(" ");
+          var dinos = (d).trim().toUpperCase().replace(".", "").split(" ");
           dinoArray = dinos;
         };
 
     getDinos.then(fillContainer);
     var dinosShuffle = shuffle(dinoArray);
     dino = (dinosShuffle[0]);
-    // dino = dino.split("");
+    dino = dino.split("");
     $('#get-dinos').hide();
     $('#letter-input').show();
     $('#some-awesome-dino').text(dino);
@@ -25,14 +25,15 @@ $(document).ready(function() {
 
   $('#input-button').click(function(e){
     e.preventDefault();
-    var letter = $('#guess-letter').val();
+    var letter = $('#guess-letter').val().toUpperCase();
     letInput.push(letter);
     letInput.forEach(function(char) {
       if (dino.includes(char) === true) {
-        var matchedChar = letInput.pop(char)
+        var matchedChar = letInput.pop(char);
         $('#some-awesome-letters').append(matchedChar);
+        $('#some-loser-letters').text(letInput);
       } else {
-          $('#some-loser-letters').text(letInput);
+        $('#some-loser-letters').text(letInput);
       };
     });
     console.log(letInput);
