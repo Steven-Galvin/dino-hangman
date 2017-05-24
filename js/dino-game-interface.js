@@ -4,7 +4,8 @@ var shuffle = require('shuffle-array');
 $(document).ready(function() {
    var dinoArray = "";
    var dino = [];
-   var letArray = [];
+   var letInput = [];
+   var letLoser = "";
 
   $('#get-dinos').click(function(event) {
     event.preventDefault();
@@ -17,22 +18,26 @@ $(document).ready(function() {
     getDinos.then(fillContainer);
     var dinosShuffle = shuffle(dinoArray);
     dino = (dinosShuffle[0]);
-    dino = dino.split("");
+    // dino = dino.split("");
     $('#get-dinos').hide();
     $('#letter-input').show();
-    dino.forEach(function(i) {
-      $('#some-awesome-container').append( i );
-
-    });
+    $('#some-awesome-dino').text(dino);
   });
 
   $('#input-button').click(function(e){
     e.preventDefault();
     var letter = $('#guess-letter').val();
-    letArray.push(letter);
-    // dino.forEach(function(i) {
-    //   $('#some-awesome-container').text(i);
-    // });
-
+    letInput.push(letter);
+    letInput.forEach(function(char) {
+      if (dino.includes(char) === true) {
+        var matchedChar = letInput.pop(char)
+        $('#some-awesome-letters').append(matchedChar);
+      } else {
+          letLoser += char
+        $('#some-loser-letters').text(letLoser);
+      };
+    });
+    console.log(letInput);
+    console.log(dino);
   });
 });
