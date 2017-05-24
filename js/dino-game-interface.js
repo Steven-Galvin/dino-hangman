@@ -5,7 +5,6 @@ $(document).ready(function() {
    var dinoArray = "";
    var dino = [];
    var letInput = [];
-   var letLoser = "";
 
   $('#get-dinos').click(function(event) {
     event.preventDefault();
@@ -33,8 +32,7 @@ $(document).ready(function() {
         var matchedChar = letInput.pop(char)
         $('#some-awesome-letters').append(matchedChar);
       } else {
-          letLoser += char
-        $('#some-loser-letters').text(letLoser);
+          $('#some-loser-letters').text(letInput);
       };
     });
     console.log(letInput);
