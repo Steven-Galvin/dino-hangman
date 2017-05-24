@@ -3,6 +3,8 @@ var shuffle = require('shuffle-array');
 
 $(document).ready(function() {
    var dinoArray = "";
+   var dino = [];
+   var letArray = [];
 
   $('#get-dinos').click(function(event) {
     event.preventDefault();
@@ -14,9 +16,23 @@ $(document).ready(function() {
 
     getDinos.then(fillContainer);
     var dinosShuffle = shuffle(dinoArray);
-    var dino = (dinosShuffle[0]);
-    dino = dino.split("")
-    $('#some-awesome-container').text(dino);
-    console.log(dinosShuffle);
+    dino = (dinosShuffle[0]);
+    dino = dino.split("");
+    $('#get-dinos').hide();
+    $('#letter-input').show();
+    dino.forEach(function(i) {
+      $('#some-awesome-container').append( i );
+
+    });
+  });
+
+  $('#input-button').click(function(e){
+    e.preventDefault();
+    var letter = $('#guess-letter').val();
+    letArray.push(letter);
+    // dino.forEach(function(i) {
+    //   $('#some-awesome-container').text(i);
+    // });
+
   });
 });
